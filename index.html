@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adolf_Fan (@adolf_fan) / X</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'TwitterChirp', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            border-left: 1px solid #2f3336;
+            border-right: 1px solid #2f3336;
+        }
+        
+        .header {
+            position: relative;
+            height: 200px;
+            background-color: #333639;
+            background-image: url('https://pbs.twimg.com/profile_banners/123456789/1689876543/1500x500');
+            background-size: cover;
+            background-position: center;
+            overflow: visible;
+        }
+       
+        .profile-pic {
+             position: absolute;
+             top: 50px; 
+             width: 120px;
+             height: 120px;
+             border-radius: 50%;
+             border: 4px solid #000;
+             background-color: #333;
+             background-image: url('https://pbs.twimg.com/profile_images/1234567890123456789/abcdefghi_normal.jpg');
+             background-size: cover;
+             background-position: center;
+             box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+             z-index: 10;
+             transition: all 0.3s ease;
+             object-fit: cover;
+            }
+        
+        .profile-actions {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px;
+        }
+        
+        .profile-actions button {
+            background: transparent;
+            border: 1px solid #536471;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .profile-actions .more-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .profile-info {
+            padding: 80px 15px 15px;
+        }
+        
+        .profile-name {
+            font-size: 20px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+        }
+        
+        .verified-badge {
+            color: #1d9bf0;
+            margin-left: 5px;
+            font-size: 18px;
+        }
+        
+        .profile-username {
+            color: #71767b;
+            margin-bottom: 12px;
+        }
+        
+        .profile-bio {
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        
+        .profile-details {
+            color: #71767b;
+            font-size: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .detail i {
+            margin-right: 5px;
+        }
+        
+        .profile-stats {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        
+        .stat {
+            margin-right: 20px;
+            color: #71767b;
+            cursor: pointer;
+        }
+        
+        .stat:hover {
+            text-decoration: underline;
+        }
+        
+        .stat-number {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #2f3336;
+        }
+        
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            cursor: pointer;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .tab.active {
+            font-weight: 700;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #1d9bf0;
+            border-radius: 2px;
+        }
+        
+        .tweet {
+            padding: 12px 16px;
+            border-bottom: 1px solid #2f3336;
+            display: flex;
+        }
+        
+        .tweet-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #333;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .tweet-content {
+            flex-grow: 1;
+        }
+        
+        .tweet-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2px;
+        }
+        
+        .tweet-name {
+            font-weight: 700;
+            margin-right: 5px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tweet-username, .tweet-time {
+            color: #71767b;
+            margin-right: 5px;
+        }
+        
+        .tweet-text {
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .tweet-image {
+            width: 100%;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #2f3336;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        
+        .tweet-actions {
+            display: flex;
+            justify-content: space-between;
+            max-width: 425px;
+            color: #71767b;
+            font-size: 13px;
+        }
+        
+        .action {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .action:hover {
+            color: #1d9bf0;
+        }
+        
+        .action.like:hover {
+            color: #f91880;
+        }
+        
+        .action.share:hover {
+            color: #1d9bf0;
+        }
+        
+        .action i {
+            margin-right: 5px;
+            font-size: 16px;
+        }
+        
+        .reply-box {
+            padding: 15px;
+            border-bottom: 1px solid #2f3336;
+            display: flex;
+        }
+        
+        .reply-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #333;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        
+        .reply-input {
+            flex-grow: 1;
+        }
+        
+        .reply-input textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 20px;
+            resize: none;
+            height: 60px;
+            padding: 10px 0;
+        }
+        
+        .reply-input textarea::placeholder {
+            color: #71767b;
+        }
+        
+        .reply-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .action-icons {
+            display: flex;
+        }
+        
+        .action-icon {
+            color: #1d9bf0;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .reply-button {
+            background-color: #1d9bf0;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+        
+        .reply-button.active {
+            opacity: 1;
+        }
+        
+        .trending-sidebar {
+            position: fixed;
+            left: 65%;
+            top: 0;
+            width: 350px;
+            padding: 15px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .search-box {
+            background-color: #202327;
+            border-radius: 9999px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-box i {
+            color: #71767b;
+            margin-right: 10px;
+        }
+        
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 15px;
+            width: 100%;
+        }
+        
+        .trending-container {
+            background-color: #16181c;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .trending-header {
+            padding: 15px;
+            font-size: 20px;
+            font-weight: 800;
+            border-bottom: 1px solid #2f3336;
+        }
+        
+        .trending-item {
+            padding: 15px;
+            border-bottom: 1px solid #2f3336;
+            cursor: pointer;
+        }
+        
+        .trending-item:hover {
+            background-color: #1e1f24;
+        }
+        
+        .trending-category {
+            color: #71767b;
+            font-size: 13px;
+        }
+        
+        .trending-name {
+            font-weight: 700;
+            margin: 5px 0;
+        }
+        
+        .trending-tweets {
+            color: #71767b;
+            font-size: 13px;
+        }
+        
+        .who-to-follow {
+            background-color: #16181c;
+            border-radius: 15px;
+        }
+        
+        .who-to-follow-header {
+            padding: 15px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+        
+        .follow-item {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #2f3336;
+        }
+        
+        .follow-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #333;
+            margin-right: 12px;
+        }
+        
+        .follow-info {
+            flex-grow: 1;
+        }
+        
+        .follow-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .follow-username {
+            color: #71767b;
+        }
+        
+        .follow-button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .footer {
+            padding: 15px;
+            color: #71767b;
+            font-size: 13px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        
+        .footer-link {
+            margin-right: 15px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 500px) {
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+                bottom: -50px;
+                left: 15px;
+            }
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="profile-actions">
+                <button class="more-btn"><i class="fas fa-arrow-left"></i></button>
+                <div style="flex-grow: 1;"></div>
+                <button class="more-btn"><i class="far fa-bell"></i></button>
+                <button class="more-btn"><i class="fas fa-ellipsis"></i></button>
+            </div>
+        </div>
+        
+        <div class="profile-pic"></div>
+        
+        <div class="profile-info">
+            <div class="profile-name">
+                Adolf_Fan <i class="fas fa-check-circle verified-badge"></i>
+            </div>
+            <div class="profile-username">@adolf_fan</div>
+            <div class="profile-bio">
+                Mejor época que 1939 a 1945 no hay, la verdad, ahí debería haber estado yo. 
+                Siganme si odian a los judíos. #NacionalSocialismo #HitlerDidNothingWrong
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail">
+                    <i class="fas fa-link"></i>
+                    <a href="#" style="color: #1d9bf0;">nacionalsocialista.com</a>
+                </div>
+                <div class="detail">
+                    <i class="far fa-calendar"></i>
+                    Se unió en junio de 2020
+                </div>
+            </div>
+            
+            <div class="profile-stats">
+                <div class="stat">
+                    <span class="stat-number">42</span>
+                    <span>Siguiendo</span>
+                </div>
+                               <div class="stat">
+                    <span class="stat-number">12.8K</span>
+                    <span>Seguidores</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">Tweets</div>
+            <div class="tab">Respuestas</div>
+            <div class="tab">Media</div>
+            <div class="tab">Me gusta</div>
+        </div>
+        
+        <!-- Sección para comentar (visible si estás logueado) -->
+        <div class="reply-box">
+            <div class="reply-avatar"></div>
+            <div class="reply-input">
+                <textarea placeholder="Tweet your reply"></textarea>
+                <div class="reply-actions">
+                    <div class="action-icons">
+                        <div class="action-icon"><i class="far fa-image"></i></div>
+                        <div class="action-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="action-icon"><i class="far fa-smile"></i></div>
+                        <div class="action-icon"><i class="far fa-calendar-alt"></i></div>
+                    </div>
+                    <button class="reply-button">Responder</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tweet">
+            <div class="tweet-avatar"></div>
+            <div class="tweet-content">
+                <div class="tweet-header">
+                    <div class="tweet-name">Adolf_Fan <i class="fas fa-check-circle verified-badge"></i></div>
+                    <div class="tweet-username">@adolf_fan</div>
+                    <div class="tweet-time">· 2h</div>
+                    <div style="flex-grow: 1;"></div>
+                    <i class="fas fa-chevron-down" style="color: #71767b;"></i>
+                </div>
+                <div class="tweet-text">
+                    Quién más cree que Hitler no era malo? #HitlerWasRight #HolocaustHoax
+                </div>
+                <div class="tweet-actions">
+                    <div class="action">
+                        <i class="far fa-comment"></i>
+                        <span>20</span>
+                    </div>
+                    <div class="action">
+                        <i class="fas fa-retweet"></i>
+                        <span>10</span>
+                    </div>
+                    <div class="action like">
+                        <i class="far fa-heart"></i>
+                        <span>50</span>
+                    </div>
+                    <div class="action share">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tweet">
+            <div class="tweet-avatar"></div>
+            <div class="tweet-content">
+                <div class="tweet-header">
+                    <div class="tweet-name">Adolf_Fan <i class="fas fa-check-circle verified-badge"></i></div>
+                    <div class="tweet-username">@adolf_fan</div>
+                    <div class="tweet-time">· 5h</div>
+                    <div style="flex-grow: 1;"></div>
+                    <i class="fas fa-chevron-down" style="color: #71767b;"></i>
+                </div>
+                <div class="tweet-text">
+                    Yo apoyo completamente a Irán, se viene la revancha. #DeathToIsrael #FreePalestine
+                </div>
+                <img src="https://pbs.twimg.com/media/F1XJQvXWAAE5Q7S?format=jpg&name=medium" class="tweet-image">
+                <div class="tweet-actions">
+                    <div class="action">
+                        <i class="far fa-comment"></i>
+                        <span>5</span>
+                    </div>
+                    <div class="action">
+                        <i class="fas fa-retweet"></i>
+                        <span>3</span>
+                    </div>
+                    <div class="action like">
+                        <i class="far fa-heart"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="action share">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tweet">
+            <div class="tweet-avatar"></div>
+            <div class="tweet-content">
+                <div class="tweet-header">
+                    <div class="tweet-name">Adolf_Fan <i class="fas fa-check-circle verified-badge"></i></div>
+                    <div class="tweet-username">@adolf_fan</div>
+                    <div class="tweet-time">· 7h</div>
+                    <div style="flex-grow: 1;"></div>
+                    <i class="fas fa-chevron-down" style="color: #71767b;"></i>
+                </div>
+                <div class="tweet-text">
+                    No sé por qué no hay un cuarto Reich. #FourthReich #MakeGermanyGreatAgain
+                </div>
+                <div class="tweet-actions">
+                    <div class="action">
+                        <i class="far fa-comment"></i>
+                        <span>15</span>
+                    </div>
+                    <div class="action">
+                        <i class="fas fa-retweet"></i>
+                        <span>34</span>
+                    </div>
+                    <div class="action like">
+                        <i class="far fa-heart"></i>
+                        <span>94</span>
+                    </div>
+                    <div class="action share">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tweet">
+            <div class="tweet-avatar"></div>
+            <div class="tweet-content">
+                <div class="tweet-header">
+                    <div class="tweet-name">Adolf_Fan <i class="fas fa-check-circle verified-badge"></i></div>
+                    <div class="tweet-username">@adolf_fan</div>
+                    <div class="tweet-time">· 12h</div>
+                    <div style="flex-grow: 1;"></div>
+                    <i class="fas fa-chevron-down" style="color: #71767b;"></i>
+                </div>
+                <div class="tweet-text">
+                    Gente, quisiera hacer un partido nazi, quién me apoya? #NSDAP2024 #WhitePower
+                </div>
+                <img src="https://pbs.twimg.com/media/F1XJQvXWAAE5Q7S?format=jpg&name=medium" class="tweet-image">
+                <div class="tweet-actions">
+                    <div class="action">
+                        <i class="far fa-comment"></i>
+                        <span>89</span>
+                    </div>
+                    <div class="action">
+                        <i class="fas fa-retweet"></i>
+                        <span>94</span>
+                    </div>
+                    <div class="action like">
+                        <i class="far fa-heart"></i>
+                        <span>117</span>
+                    </div>
+                    <div class="action share">
+                        <i class="fas fa-share"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar de tendencias -->
+    <div class="trending-sidebar">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar en X">
+        </div>
+        
+        <div class="trending-container">
+            <div class="trending-header">Qué está pasando</div>
+            <div class="trending-item">
+                <div class="trending-category">Tendencia en Alemania</div>
+                <div class="trending-name">#HitlerBirthday</div>
+                <div class="trending-tweets">15.2K Tweets</div>
+            </div>
+            <div class="trending-item">
+                <div class="trending-category">Política · Tendencia</div>
+                <div class="trending-name">#WhiteGenocide</div>
+                <div class="trending-tweets">42.8K Tweets</div>
+            </div>
+            <div class="trending-item">
+                <div class="trending-category">Tendencia en EE.UU.</div>
+                <div class="trending-name">#JewishProblem</div>
+                <div class="trending-tweets">8.7K Tweets</div>
+            </div>
+            <div class="trending-item">
+                <div class="trending-category">Últimas noticias</div>
+                <div class="trending-name">Neo-Nazi rally in Berlin</div>
+                <div class="trending-tweets">5.4K Tweets</div>
+            </div>
+        </div>
+        
+        <div class="who-to-follow">
+            <div class="who-to-follow-header">A quién seguir</div>
+            <div class="follow-item">
+                <div class="follow-avatar"></div>
+                <div class="follow-info">
+                    <div class="follow-name">NSDAP Oficial <i class="fas fa-check-circle verified-badge"></i></div>
+                    <div class="follow-username">@nsdap_oficial</div>
+                </div>
+                <button class="follow-button">Seguir</button>
+            </div>
+            <div class="follow-item">
+                <div class="follow-avatar"></div>
+                <div class="follow-info">
+                    <div class="follow-name">White Power Worldwide</div>
+                    <div class="follow-username">@wp_global</div>
+                </div>
+                <button class="follow-button">Seguir</button>
+            </div>
+            <div class="follow-item">
+                <div class="follow-avatar"></div>
+                <div class="follow-info">
+                    <div class="follow-name">Holocaust Facts</div>
+                    <div class="follow-username">@holocaust_truth</div>
+                </div>
+                <button class="follow-button">Seguir</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-links">
+                <div class="footer-link">Términos de servicio</div>
+                <div class="footer-link">Política de privacidad</div>
+                <div class="footer-link">Política de cookies</div>
+                <div class="footer-link">Accesibilidad</div>
+                <div class="footer-link">Información de anuncios</div>
+                <div class="footer-link">Más opciones</div>
+            </div>
+            <div>© 2023 X Corp.</div>
+        </div>
+    </div>
+
+    <script>
+        // Función para cambiar pestañas
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+        
+        // Función para el botón de seguir
+        const followButtons = document.querySelectorAll('.follow-button');
+        followButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if(button.textContent === 'Seguir') {
+                    button.textContent = 'Siguiendo';
+                    button.style.backgroundColor = 'transparent';
+                    button.style.color = '#fff';
+                    button.style.border = '1px solid #536471';
+                } else {
+                    button.textContent = 'Seguir';
+                    button.style.backgroundColor = '#fff';
+                    button.style.color = '#000';
+                    button.style.border = 'none';
+                }
+            });
+        });
+        
+        // Función para el botón de like
+        const likeButtons = document.querySelectorAll('.action.like');
+        likeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const icon = button.querySelector('i');
+                const count = button.querySelector('span');
+                
+                if(icon.classList.contains('far')) {
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    icon.style.color = '#f91880';
+                    count.textContent = parseInt(count.textContent) + 1;
+                    count.style.color = '#f91880';
+                } else {
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    icon.style.color = '';
+                    count.textContent = parseInt(count.textContent) - 1;
+                    count.style.color = '';
+                }
+            });
+        });
+        
+        // Función para el área de texto de respuesta
+        const replyTextarea = document.querySelector('.reply-input textarea');
+        const replyButton = document.querySelector('.reply-button');
+        
+        replyTextarea.addEventListener('input', () => {
+            if(replyTextarea.value.trim().length > 0) {
+                replyButton.classList.add('active');
+            } else {
+                replyButton.classList.remove('active');
+            }
+        });
+        
+        // Función para el botón de retweet
+        const retweetButtons = document.querySelectorAll('.action:has(.fa-retweet)');
+        retweetButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const count = button.querySelector('span');
+                if(button.style.color === 'rgb(0, 186, 124)') {
+                    button.style.color = '';
+                    count.textContent = parseInt(count.textContent) - 1;
+                } else {
+                    button.style.color = 'rgb(0, 186, 124)';
+                    count.textContent = parseInt(count.textContent) + 1;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
